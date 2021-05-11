@@ -26,18 +26,15 @@ bool binary_search(int N, std::vector<int>& S) {
     while (true) {
         // 현재 검색 범위의 중간 원소를 mid_element에 저장
         auto range_length = std::distance(first, last);
-        auto mid_element_index = first + std::floor(range_length / 2);
-        auto mid_element = *mid_element_index;
-        //auto mid_element = *(first + mid_element_index);
+        auto mid_element_index = std::floor(range_length / 2);
+        auto mid_element = *(first + mid_element_index);
 
         if (mid_element == N)
             return true;
         else if (mid_element > N)
-            std::advance(last, -std::floor(range_length / 2)); // last를 중간 원소 위치로 옮김
-            //std::advance(last, -mid_element_index);
+            std::advance(last, -mid_element_index); // last를 중간 원소 위치로 옮김
         if (mid_element < N)
-            std::advance(first, std::floor(range_length / 2)); // first를 중간 원소 위치로 옮김
-            //std::advance(first, mid_element_index);
+            std::advance(first, mid_element_index); // first를 중간 원소 위치로 옮김
         
         // 현재 검색 범위에 하나의 원소만 남아 있다면 false
         if (range_length == 1)
