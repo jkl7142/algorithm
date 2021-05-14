@@ -1,5 +1,5 @@
 /*
-*       Exercise 18 : 抗规 立辆
+*       Activity 8 : 抗规 立辆
 */
 
 #include <iostream>
