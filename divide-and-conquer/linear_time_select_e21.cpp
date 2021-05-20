@@ -112,6 +112,7 @@ typename std::vector<T>::iterator linear_time_select(typename std::vector<T>::it
             M.push_back(*find_median<T>(b, l));
         }
 
+        // 마지막 벡터
         if (j * 5 < size) {
             auto b = begin + (j * 5);
             auto l = begin + (j * 5) + (size % 5);
