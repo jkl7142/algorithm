@@ -3,10 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:\\Users\\jkl41\\vscode\\boost_1_76_0",
-                "C:\\Program Files\\OpenSSL-Win64",
-                "C:\\Users\\jkl41\\vscode\\mapreduce"
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",

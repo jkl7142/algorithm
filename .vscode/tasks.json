@@ -38,14 +38,7 @@
             "args": [
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "-I", "C:\\Users\\jkl41\\vscode\\boost_1_76_0",
-                "-L", "C:\\Users\\jkl41\\vscode\\boost_1_76_0\\libs",
-                "-I", "C:\\Program Files\\OpenSSL-Win64",
-                "-I", "C:\\Program Files\\OpenSSL-Win64\\include",
-                "-L", "C:\\Program Files\\OpenSSL-Win64\\lib",
-                "-I", "C:\\Users\\jkl41\\vscode\\mapreduce\\include",
-                "-std=c++0x", "-lpthread"
+                "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "group": "build",
             //컴파일시 에러를 편집기에 반영
@@ -75,11 +68,7 @@
             "group": "test",
             "args": [
                 "/C",
-                "${fileDirname}\\${fileBasenameNoExtension}",
-                "-I", "C:\\Users\\jkl41\\vscode\\boost_1_76_0",
-                "-I", "C:\\Program Files\\OpenSSL-Win64",
-                "-I", "C:\\Program Files\\OpenSSL-Win64\\include",
-                "-I", "C:\\Users\\jkl41\\vscode\\mapreduce\\include"
+                "${fileDirname}\\${fileBasenameNoExtension}"
             ]
         }
     ]
