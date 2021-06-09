@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <iostream>
 #include <climits>
-#include <fstream>
+//#include <fstream>
 #include <map>
 
 using namespace std;
@@ -21,15 +21,14 @@ struct Edge {
 const int UNKNOWN = INT_MAX;
 
 // 테스트 케이스 읽기 함수
-bool ReadTestCase(vector<Edge> test, int& V, vector<Edge>& edges)
+bool ReadTestCase(vector<Edge> test, int& V, int& E, vector<Edge>& edges)
 {
-	int E;
-	//infile >> V >> E;
 
 	for (int i = 0; i < E; i++)
 	{
-		int u, v, w;
-		infile >> u >> v >> w;
+		int u = test[i].src;
+        int v = test[i].dst;
+        int w = test[i].weight;
 
 		edges.push_back(Edge {u, v, w});
 	}
@@ -184,6 +183,54 @@ int BellmanFord(vector<Edge> edges, int V, int start) {
     return result;
 }
 
+void print_test(vector<Edge> test, int V, int E, vector<Edge> edges) {
+
+    ReadTestCase(test, V, E, edges);
+
+    vector<vector<int>> adj(V + 1);
+
+    for (auto& e : edges) {
+        adj[e.src].push_back(e.dst);
+    }
+
+    vector<int> results;
+
+    for (int i = 0; i < V; i++) {
+        if (adj[i].empty()) {
+            results.push_back(UNKNOWN);
+            continue;
+        }
+
+        int shortest = BellmanFord(edges, V, i);
+
+        if (shortest == UNKNOWN) {
+            cout << "유효하지 않은 미로" << endl;
+            exit(0);
+        }
+
+        results.push_back(shortest);
+    }
+
+    for (int i = 0; i < V; i++) {
+        if (results[i] == UNKNOWN)
+            cout << i << ": 고립된 방" << endl;
+        else
+            cout << i << ": " << results[i] << endl;
+    }
+
+    auto components = Kosaraju(V, adj);
+
+    for (int i = 0; i < components.size(); i++) {
+        if (isStuck[i]) {
+            for (auto node : components[i]) {
+                cout << node << " ";
+            }
+
+            cout << endl;
+        }
+    }
+}
+
 int main() {
     int V;
     vector<Edge> edges;
@@ -260,56 +307,21 @@ int main() {
                 {4, 7, -20}, {4, 10, 26},
                 {5, 1, 14}, {6, 2, -1},
                 {6, 3, 83}, {6, 10, -45},
-                {7, 8, 70}, {8, 7, 81},
-                {8, 11, -41}, {9, 0, -1},
-                {10, 3, 23}, {10, 6, 61},
-                {10, 7, 32}, {12, 8, 40},
-                {12, 11, -64}};
+                {7, 8, 70}, {7, 12, -47},
+                {8, 7, 81}, {8, 11, -41},
+                {9, 0, -1}, {10, 3, 23},
+                {10, 6, 61}, {10, 7, 32},
+                {12, 8, 40}, {12, 11, -64}};
 
     //ReadTestCase(test, V, edges);
 
-    vector<vector<int>> adj(V + 1);
-
-    for (auto& e : edges) {
-        adj[e.src].push_back(e.dst);
-    }
-
-    vector<int> results;
-
-    for (int i = 0; i < V; i++) {
-        if (adj[i].empty()) {
-            results.push_back(UNKNOWN);
-            continue;
-        }
-
-        int shortest = BellmanFord(edges, V, i);
-
-        if (shortest == UNKNOWN) {
-            cout << "유효하지 않은 미로" << endl;
-            return 0;
-        }
-
-        results.push_back(shortest);
-    }
-
-    for (int i = 0; i < V; i++) {
-        if (results[i] == UNKNOWN)
-            cout << i << ": 고립된 방" << endl;
-        else
-            cout << i << ": " << results[i] << endl;
-    }
-
-    auto components = Kosaraju(V, adj);
-
-    for (int i = 0; i < components.size(); i++) {
-        if (isStuck[i]) {
-            for (auto node : components[i]) {
-                cout << node << " ";
-            }
-
-            cout << endl;
-        }
-    }
+    // print_test(test[0], 7, 9, edges);
+    // print_test(test[1], 8, 16, edges);
+    // print_test(test[2], 10, 17, edges);
+    // print_test(test[3], 15, 26, edges);
+    // print_test(test[4], 9, 14, edges);
+    // sprint_test(test[5], 18, 39, edges);
+    print_test(test[6], 13, 24, edges);
 
     return 0;
 }
