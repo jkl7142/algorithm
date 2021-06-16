@@ -101,6 +101,7 @@ bool SubsetSum_Memoization(vector<int>& set, int sum, int i,
     }
 
     // 현재 상태가 캐시에 있는지 확인
+    // 캐시에 있다면 재귀호출을 안하므로 효율성 증가
     if (memo[i][sum] == UNKNOWN) {
         // 현재 상태에 대한 솔루션을 구하여 캐시에 저장
         bool append = SubsetSum_Memoization(set, sum - set[i], i + 1, memo);
@@ -110,6 +111,7 @@ bool SubsetSum_Memoization(vector<int>& set, int sum, int i,
     }
 
     // 캐시에 저장된 값을 반환
+    // i : 키, sum : 결과값, memo[i][sum] : 매칭값
     return memo[i][sum];
 }
 
